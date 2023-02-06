@@ -1,7 +1,6 @@
 <#-------------------------------------------------------------------------------------------
-Automated Connection with Username & Password - Running the code below will connect without user prompts 
-** The account you're using will need Power BI administrator permissions
-** The method below will not work if MFA is required for the account
+This script is intended for the users that wants to assign an specific account to all the workspaces as an admin (or any other role).
+The script has a very static way to deal with the timeouts, it does the job.
 -------------------------------------------------------------------------------------------#>
 
 #Variables 
@@ -69,7 +68,7 @@ while($requestCounter  -lt 10){
 Write-Host 'Start to assign user to workspaces'
 write-Host "Number of workspaces to be assign: $($WsnoSvcacct.count)`n"
 
-$limit = 150 #Can be changed to 200
+$limit = 200 #200 is the limit per request per hour.
 
 ForEach ($w in $WsnoSvcacct)
 {
@@ -107,7 +106,7 @@ ForEach ($w in $WsnoSvcacct)
                 
             }
             Connect-PowerBIServiceAccount -Credential $PbiCredential
-            $limit = 150 #Can be change to 200  
+            $limit = 200 #Can be change to 200  
         } 
     }
 
