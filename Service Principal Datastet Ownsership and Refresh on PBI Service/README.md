@@ -12,7 +12,6 @@ We will do two scripts for the two possible scenarios:
 
 ![Service Principal Image](https://dsm04pap003files.storage.live.com/y4mc7Jn2qd7aPy8T6Zh3vTeLtq-8iGklBegbsRgz_2avfGbdirW1UamujvtB8tbj4rFaxu_cIzE3ilGnZGxOiH9SrrOXEnsfn0eLVkhq6VqkK8H__DkZv3sp-l-koz8vYcINgVJSGNla93DU3-8sifALMnYjqo6VGLHs5zcRVOktFe2RLYSN4YprEDvA_nFsa6w?encodeFailures=1&width=696&height=372)
 
-We will provide two scripts for two different scenarios:
 
 ## Scenario 1: Dataset using cloud credentials
 
