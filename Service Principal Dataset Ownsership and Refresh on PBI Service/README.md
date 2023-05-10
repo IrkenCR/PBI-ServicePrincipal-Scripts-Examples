@@ -30,3 +30,5 @@ Both Users and Service Principals have dedicated virtual Data Gateways to secure
 ![Gateway Example](https://dsm04pap003files.storage.live.com/y4mSRucrJ1OZn0dydmxBSLALOshoLw9qTpb3ErC8NTQHMIAbS_l9HDzmbAIaMyWF5_8hmwMOqMV_K6OClZzux4mUdrVh_oKL9T5mPSgwtsrRu4pC2cijWaB5777QF8hM8Zdd5f2uscTgVq0LaBu1umrwtTAcxphsGozvkx6UY2vWM4yq9QebchhZ4OcIoAOHUbaiM-CGD2xKm94_LsiKSxZ9qnVxwA031AsYadbchLAaBA?encodeFailures=1&width=842&height=637)
 
 # Script for Scenario 1:
+
+
