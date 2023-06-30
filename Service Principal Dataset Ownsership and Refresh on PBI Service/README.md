@@ -29,6 +29,27 @@ Both Users and Service Principals have dedicated virtual Data Gateways to secure
 
 ![Gateway Example](https://dsm04pap003files.storage.live.com/y4mSRucrJ1OZn0dydmxBSLALOshoLw9qTpb3ErC8NTQHMIAbS_l9HDzmbAIaMyWF5_8hmwMOqMV_K6OClZzux4mUdrVh_oKL9T5mPSgwtsrRu4pC2cijWaB5777QF8hM8Zdd5f2uscTgVq0LaBu1umrwtTAcxphsGozvkx6UY2vWM4yq9QebchhZ4OcIoAOHUbaiM-CGD2xKm94_LsiKSxZ9qnVxwA031AsYadbchLAaBA?encodeFailures=1&width=842&height=637)
 
-# Script for Scenario 1:
+# Scripts for Scenario 1:
+
+The first step is to get the Service Principal virtual gateway, to perform this operation we need to publish a report with the Service Principal.  Remember to add the Service Principal to the workspace before running the script.
+
+```powershell
+
+$TenantId  = "f6bd1ff3-86a2-4bc9-811c-82be3d1a2049" 
+$AppId     = "a40917e9-8c42-44fc-8791-4a88c0caa19c"  # Service PRincipal ID
+$Secret    = "r.N7Q~GaVaGXxjjq2gdwKbmmfdzxJdzpcMd1l"  # Secret from Service Principal
+$GroupId   = "3e0d2a99-4399-4d1a-9f98-f58b5cec8f0f"  # Workspace ID
+$DatasetId = ""
+
+
+# Connect the Service Principal
+$password = ConvertTo-SecureString $Secret -AsPlainText -Force
+$Creds = New-Object PSCredential $AppId, $password
+Connect-PowerBIServiceAccount -ServicePrincipal -Credential $Creds -Tenant $TenantId
+
+# Publish a dataset
+New-PowerBIReport -Path 'C:\Users\andreiamador\OneDrive\Sample Files\AW Person Import.pbix' -Name 'SPReport' -WorkspaceId "3e0d2a99-4399-4d1a-9f98-f58b5cec8f0f"
+
+```
 
 
