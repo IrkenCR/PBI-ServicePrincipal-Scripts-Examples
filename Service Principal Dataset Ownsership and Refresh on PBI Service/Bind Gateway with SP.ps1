@@ -4,7 +4,7 @@ $AppId     = "a40917e9-8c42-44fc-8791-4a88c0caa19c"  # Service PRincipal ID
 $Secret    = "r.N7Q~GaVaGXxjjq2gdwKbmmfdzxJdzpcMd1l"  # Secret from Service Principal
 $GroupId   = "b008a208-af93-44f1-81b2-ce92e08e92dc"  # Workspace ID
 $DatasetId = "c230407c-a53f-4b36-94c5-f7b28364a259"
-$workspaceID = "b008a208-af93-44f1-81b2-ce92e08e92dc"
+
 
 
 # Connect the Service Principal
@@ -14,8 +14,20 @@ Connect-PowerBIServiceAccount -ServicePrincipal -Credential $Creds -Tenant $Tena
 
 $headers = Get-PowerBIAccessToken
 
+$authHeader = @{
+'Content-Type'='application/json'
+'Authorization'= $headers.Authorization
+}
 
-$uri = "https://api.powerbi.com/v1.0/myorg/groups/"+ $workspaceID +"/datasets/"+ $datasetID +"/datasources"
-$response = Invoke-RestMethod -Uri $uri -Headers $headers -Method GET -Verbose |  ConvertTo-Json
+$body = @"
+{
+  "gatewayObjectId": "34f6f0cf-d9e7-462b-bf21-c1a71566c614"
+}
+"@
+
+
+
+$uri =  "https://api.powerbi.com/v1.0/myorg/groups/" + $GroupId + "/datasets/" + $DatasetId + "/Default.BindToGateway"
+$response = Invoke-RestMethod -Uri $uri -Headers $authHeader -Body $body -Method POST -Verbose |  ConvertTo-Json 
 $response
 #Disconnect-PowerBIServiceAccount

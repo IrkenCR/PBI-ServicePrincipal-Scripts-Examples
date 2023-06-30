@@ -8,9 +8,6 @@ $workspaceID = "3e0d2a99-4399-4d1a-9f98-f58b5cec8f0f"
 $VGatewayID = "34f6f0cf-d9e7-462b-bf21-c1a71566c614"
 $datasourceID = "6b190df1-1b4c-41fc-8e02-3702338bccc0"
 
-$username = "andrei.amador"
-$password = "Goldie9226!!"
-
 
 
 
@@ -44,6 +41,8 @@ $body = @"
     }
 }
 "@
+
+
 
 
 

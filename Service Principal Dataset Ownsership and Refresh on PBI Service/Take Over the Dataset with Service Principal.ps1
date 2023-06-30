@@ -4,7 +4,16 @@ $AppId     = "a40917e9-8c42-44fc-8791-4a88c0caa19c"  # Service PRincipal ID
 $Secret    = "r.N7Q~GaVaGXxjjq2gdwKbmmfdzxJdzpcMd1l"  # Secret from Service Principal
 $GroupId   = "b008a208-af93-44f1-81b2-ce92e08e92dc"  # Workspace ID
 $DatasetId = "c230407c-a53f-4b36-94c5-f7b28364a259"
-$workspaceID = "b008a208-af93-44f1-81b2-ce92e08e92dc"
+
+
+
+$headers = Get-PowerBIAccessToken
+
+$authHeader = @{
+'Content-Type'='application/json'
+'Authorization'= $headers.Authorization
+}
+
 
 
 # Connect the Service Principal
@@ -15,7 +24,7 @@ Connect-PowerBIServiceAccount -ServicePrincipal -Credential $Creds -Tenant $Tena
 $headers = Get-PowerBIAccessToken
 
 
-$uri = "https://api.powerbi.com/v1.0/myorg/groups/"+ $workspaceID +"/datasets/"+ $datasetID +"/datasources"
-$response = Invoke-RestMethod -Uri $uri -Headers $headers -Method GET -Verbose |  ConvertTo-Json
+$uri = "https://api.powerbi.com/v1.0/myorg/groups/"+ $GroupId +"/datasets/"+ $datasetId +"/Default.TakeOver"
+$response = Invoke-RestMethod -Uri $uri -Headers $authHeader -Method POST -Verbose |  ConvertTo-Json 
 $response
 #Disconnect-PowerBIServiceAccount
