@@ -13,18 +13,30 @@
 
 # This script has been tested under a certain conditions, if it throws errors it could be because a new condition, we can't guarantee this will work 100% of the times.
 
+
 # Set the source and target Premium Capacities
 $sourceCapacityId = "DDED435E-6B6E-44E8-AE2F-680F9D99C38C"
 $targetCapacityId = "187E6C18-A7B9-43D1-8EE7-345B054BCFCC"
 $filesPath = "C:\temp"
+$successCSV = "$filesPath\SuccessWorkspaces.csv"
+
+
 
 # Connect to Power BI service
 Connect-PowerBIServiceAccount
+
 
 # Get all workspaces in the source Premium Capacity - You can also add filters, or change the Scope to individual. 
 # https://learn.microsoft.com/en-us/powershell/module/microsoftpowerbimgmt.workspaces/get-powerbiworkspace?view=powerbi-ps
 # https://learn.microsoft.com/en-us/rest/api/power-bi/groups/get-groups
 $sourceWorkspaces = Get-PowerBIWorkspace -Scope Organization -Filter "capacityId eq '$sourceCapacityId'"
+
+
+# If you want to move only the workspaces that you have moved previously, comment line #22 and uncomment lines 26 and 27.
+#$importedCSV = Import-Csv $successCSV
+#$sourceWorkspaces = $importedCSV | Select-Object @{Name='Id'; Expression={$_.WorkspaceId}}, @{Name='Name'; Expression={$_.WorkspaceName}}, *
+
+
 
 # Initialize arrays to store success and failure details
 $successWorkspaces = @()
@@ -34,10 +46,11 @@ foreach ($workspace in $sourceWorkspaces) {
     try {
         # Move the workspace to the target Premium Capacity
         Set-PowerBIWorkspace -Id $workspace.Id -CapacityId $targetCapacityId -Scope Organization
+        # Set-PowerBIWorkspace -Id $workspace.WorkspaceId -CapacityId $targetCapacityId -Scope Organization
 
         # Add details to the success array
         $successWorkspaces += [PSCustomObject]@{
-            WorkspaceName = $workspace.Name
+            WorkspaceName = $workspace.Name #Change this for $workspace.WorkspaceName if you are going to migrate the previous workspaces.
             WorkspaceId = $workspace.Id
             Status = "Success"
         }
